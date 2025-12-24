@@ -98,4 +98,5 @@ botao_sair.pack()
 
 
 tela.mainloop()
+
 # pyinstaller --onefile AutoCleker.py

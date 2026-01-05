@@ -1,6 +1,7 @@
 import tkinter as tk
 import threading
 from tkinter import Frame
+
 import pyautogui
 import time
 

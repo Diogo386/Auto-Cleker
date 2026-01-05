@@ -87,7 +87,7 @@ label_status.pack()
 
 botao_iniciar = tk.Button(area3,text="Iniciar",command=iniciar)
 botao_iniciar.pack(pady= 5,padx= 10,side="left")
-
+.
 
 botao_parar = tk.Button(area3,text="Parar",command=parar)
 botao_parar.pack(pady= 5,padx=10,side="right")

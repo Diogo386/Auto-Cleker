@@ -95,7 +95,7 @@ botao_parar.pack(pady= 5,padx=10,side="right")
 botao_sair = tk.Button(area4,text="Sair",command=quit)
 botao_sair.pack()
 
-erw
+
 
 tela.mainloop()
 

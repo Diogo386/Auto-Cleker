@@ -79,6 +79,7 @@ label_entrada = tk.Label(area1,text='Tempo por click:',font=("Arial",10 ))
 label_entrada.pack(side="left")
 
 entrada_tempo = tk.Entry(area1)
+entrada_tempo.insert(0, "0.1")  # Valor padrão de 0.1 segundos
 entrada_tempo.pack()
 
 

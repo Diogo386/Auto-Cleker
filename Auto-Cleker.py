@@ -107,6 +107,7 @@ def ModoBP(event=None):
 
 def Sair_app(event=None):
     return tela.quit()
+
 titulo = tk.Label(text="Auto Cliker\nVersão:001",font=("Arial", 10, "bold"),bg="light gray")
 titulo['border'] = 5
 titulo.pack(pady= 10,padx= 5)

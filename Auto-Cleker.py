@@ -7,7 +7,7 @@ import time
 
 
 tela = tk.Tk()
-tela.geometry("280x200")
+tela.geometry("280x250")
 tela.title("Auto Cliker")
 
 click = True
@@ -48,32 +48,73 @@ def parar_fora(event=None):
     else:
         iniciar()
 
+
+modoBranco = False
+
+def ModoBP():
+    global modoBranco
+
+    if modoBranco:
+        status.config(text='Modo:BRANCO')
+        tela['bg'] = 'gray94'
+        area1['bg'] = 'gray94'
+        area2['bg'] = 'gray94'
+        area3['bg'] = 'gray94'
+        area4['bg'] = 'gray94'
+        area5['bg'] = 'gray94'
+        modoBranco = False
+
+    elif not modoBranco:
+        status.config(text='Modo:PRETO',fg='black')
+        tela['bg'] = 'gray16'
+        area1['bg'] = 'gray16'
+        botao_iniciar['bg'] = 'gray16'
+        botao_iniciar['fg'] = 'gray86'
+        area2['bg'] = 'gray16'
+        area3['bg'] = 'gray16'
+        area4['bg'] = 'gray16'
+        area5['bg'] = 'gray16'
+        modoBranco = True
+
+
+
 tela.bind("<F2>",parar_fora )
 tela.bind('<F3>',quit)
 
 
-titulo = tk.Label(text="Auto Cliker\nVersão:001",font=("Arial", 10, "bold"))
+titulo = tk.Label(text="Auto Cliker\nVersão:001",font=("Arial", 10, "bold"),bg="light gray")
+titulo['border'] = 5
 titulo.pack()
 
 area1 = Frame()
-area1 ["pady"] = 5
+area1["pady"] = 5
 area1["width"] = 5
+area1['border'] = 1
 area1.pack()
 
 area2 = Frame()
 area2 ["pady"] = 5
 area2["width"] = 5
+area2['border'] = 1
 area2.pack()
 
 area3 = Frame()
 area3 ["pady"] = 5
 area3["width"] = 5
+area3['border'] = 1
 area3.pack()
 
 area4 = Frame()
 area4 ["pady"] = 5
 area4["width"] = 5
+area4['border'] = 1
 area4.pack()
+
+area5 = Frame()
+area5["pady"] = 5
+area5["width"] = 5
+area5['border'] = 1
+area5.pack()
 
 label_entrada = tk.Label(area1,text='Tempo por click:',font=("Arial",10 ))
 label_entrada.pack(side="left")
@@ -96,7 +137,12 @@ botao_parar.pack(pady= 5,padx=10,side="right")
 botao_sair = tk.Button(area4,text="Sair",command=quit)
 botao_sair.pack()
 
+botao_modo = tk.Button(area5,text="Modo",command=ModoBP)
+botao_modo.pack(padx=5,pady=5,side="left")
 
+status = tk.Label(area5,text='Modo:BRANCO',bg="light gray")
+
+status.pack(padx=5,pady=5,side="left")
 
 tela.mainloop()
 

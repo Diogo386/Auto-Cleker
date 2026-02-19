@@ -51,7 +51,7 @@ def parar_fora(event=None):
 
 modoBranco = False
 
-def ModoBP():
+def ModoBP(event=None):
     global modoBranco
 
     if modoBranco:
@@ -105,76 +105,72 @@ def ModoBP():
         label_status_modo.config(text='Modo:PRETO',bg='gray25',fg='gray86')
         modoBranco = True
 
-
-
-tela.bind("<F2>",parar_fora )
-tela.bind('<F3>',quit)
-
-
 titulo = tk.Label(text="Auto Cliker\nVersão:001",font=("Arial", 10, "bold"),bg="light gray")
 titulo['border'] = 5
 titulo.pack(pady= 10,padx= 5)
 
+# Começo da area 1
 area1 = Frame()
 #area1["pady"] = 3
 #area1["width"] = 3
 area1['bg'] = 'light gray'
 area1['border'] = 5
 area1.pack()
-
-area2 = Frame()
-area2["pady"] = 5
-area2["width"] = 5
-area2['border'] = 1
-area2.pack()
-
-area3 = Frame()
-area3["pady"] = 5
-area3["width"] = 5
-area3['border'] = 1
-area3.pack()
-
-area4 = Frame()
-area4["pady"] = 5
-area4["width"] = 5
-area4['border'] = 1
-area4.pack()
-
-area5 = Frame()
-area5["pady"] = 5
-area5["width"] = 5
-area5['border'] = 1
-area5.pack()
-
 label_entrada = tk.Label(area1,text='Tempo por click:',font=("Arial",10 ),bg='light gray')
 label_entrada.pack(side="left")
 
 entrada_tempo = tk.Entry(area1)
 entrada_tempo.insert(0, "0.1")  # Valor padrão de 0.1 segundos
 entrada_tempo.pack()
+# Fim da area 1 onde mostra, usa e lê um valor/tempo de clique
 
-
+# Começo da area 2
+area2 = Frame()
+area2["pady"] = 5
+area2["width"] = 5
+area2['border'] = 1
+area2.pack()
 label_status = tk.Label(area2,text="Status: DESLIGADO", fg="red",font=("Arial",10 ))
 label_status.pack()
+# Fim da area 2 onde mostra se o programa(Auto-Cleker) está ligado ou desligado
 
-
+# Começo da area 3
+area3 = Frame()
+area3["pady"] = 5
+area3["width"] = 5
+area3['border'] = 1
+area3.pack()
 botao_iniciar = tk.Button(area3,text="Iniciar",command=iniciar)
 botao_iniciar.pack(pady= 5,padx= 10,side="left")
-
 botao_parar = tk.Button(area3,text="Parar",command=parar)
 botao_parar.pack(pady= 5,padx=10,side="right")
+# Fim da area 3 onde tem o botão de iniciar e de parar o programa
 
-
+# Começo da area 4
+area4 = Frame()
+area4["pady"] = 5
+area4["width"] = 5
+area4['border'] = 1
+area4.pack()
 botao_sair = tk.Button(area4,text="Sair",command=quit)
 botao_sair.pack()
+# Fim da area 4 onde tem o botão de Sair do programa
 
-
+# Começo da area 5
+area5 = Frame()
+area5["pady"] = 5
+area5["width"] = 5
+area5['border'] = 1
+area5.pack()
 botao_modo = tk.Button(area5,text="Modo",command=ModoBP)
 botao_modo.pack(padx=5,pady=5,side="left")
-
 label_status_modo = tk.Label(area5,text='Modo:BRANCO',bg="light gray")
 label_status_modo.pack(padx=5,pady=5,side="left")
+# Fim da area 5 onde tem um botão que muda o modo de claro para escuro e vise versa
 
+tela.bind("<F2>",parar_fora)
+tela.bind('<F3>',quit)
+tela.bind("<F4>",ModoBP)
 tela.mainloop()
 
 # pyinstaller --onefile AutoCleker.py

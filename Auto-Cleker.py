@@ -1,3 +1,4 @@
+import keyboard
 import tkinter as tk
 import threading
 from tkinter import Frame
@@ -13,6 +14,7 @@ tela.title("Auto Cliker")
 click = True
 situacao = False
 
+modoBranco = False
 
 def auto_cliker():
     tempo = float(entrada_tempo.get())
@@ -22,34 +24,32 @@ def auto_cliker():
         time.sleep(tempo)
 
 
-def iniciar():
+def Iniciar():
     global click,situacao
     if not situacao:
         click = True
         situacao = True
-        atualizar_status()
+        Atualizar_status()
         threading.Thread(target=auto_cliker,daemon=True,).start()
 
-def parar():
+def Parar():
     global click,situacao
     click = False
     situacao = False
-    atualizar_status()
+    Atualizar_status()
 
-def atualizar_status():
+def Atualizar_status():
     if situacao:
         label_status.config(text="Status: LIGADO", fg="light green")
     else:
         label_status.config(text="Status: DESLIGADO", fg="red")
 
-def parar_fora(event=None):
+def Parar_iniciar(event=None):
     if situacao:
-        parar()
+        Parar()
     else:
-        iniciar()
+        Iniciar()
 
-
-modoBranco = False
 
 def ModoBP(event=None):
     global modoBranco
@@ -105,6 +105,8 @@ def ModoBP(event=None):
         label_status_modo.config(text='Modo:PRETO',bg='gray25',fg='gray86')
         modoBranco = True
 
+def Sair_app(event=None):
+    return tela.quit()
 titulo = tk.Label(text="Auto Cliker\nVersão:001",font=("Arial", 10, "bold"),bg="light gray")
 titulo['border'] = 5
 titulo.pack(pady= 10,padx= 5)
@@ -140,9 +142,9 @@ area3["pady"] = 5
 area3["width"] = 5
 area3['border'] = 1
 area3.pack()
-botao_iniciar = tk.Button(area3,text="Iniciar",command=iniciar)
+botao_iniciar = tk.Button(area3,text="Iniciar",command=Iniciar)
 botao_iniciar.pack(pady= 5,padx= 10,side="left")
-botao_parar = tk.Button(area3,text="Parar",command=parar)
+botao_parar = tk.Button(area3,text="Parar",command=Parar)
 botao_parar.pack(pady= 5,padx=10,side="right")
 # Fim da area 3 onde tem o botão de iniciar e de parar o programa
 
@@ -168,9 +170,10 @@ label_status_modo = tk.Label(area5,text='Modo:BRANCO',bg="light gray")
 label_status_modo.pack(padx=5,pady=5,side="left")
 # Fim da area 5 onde tem um botão que muda o modo de claro para escuro e vise versa
 
-tela.bind("<F2>",parar_fora)
-tela.bind('<F3>',quit)
-tela.bind("<F4>",ModoBP)
+keyboard.add_hotkey("\+1", Parar_iniciar)
+keyboard.add_hotkey("\+esc", Sair_app)
+keyboard.add_hotkey("\+2", ModoBP)
+
 tela.mainloop()
 
 # pyinstaller --onefile AutoCleker.py

@@ -53,9 +53,7 @@ def Parar_iniciar(event=None):
 
 def ModoBP(event=None):
     global modoBranco
-
     if modoBranco:
-
         tela['bg'] = 'gray94'
         area1['bg'] = 'light gray'
         titulo['bg'] = 'light gray'
@@ -79,7 +77,6 @@ def ModoBP(event=None):
         botao_modo['fg'] = 'black'
         label_status_modo.config(text='Modo:BRANCO',bg='light gray',fg='black')
         modoBranco = False
-
     elif not modoBranco:
         tela['bg'] = 'gray16'
         titulo['bg'] = 'gray25'

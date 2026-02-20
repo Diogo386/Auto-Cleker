@@ -8,7 +8,7 @@ import time
 
 
 tela = tk.Tk()
-tela.geometry("280x280")
+tela.geometry("280x290")
 tela.title("Auto Cliker")
 
 click = True
@@ -16,12 +16,28 @@ situacao = False
 
 modoBranco = False
 
+botao_esquerdo = False
+
+def Botao_esquerda_direita(event=None):
+    global botao_esquerdo
+    if botao_esquerdo:
+        ed_botao.config(text='Botão Esquerdo')
+        botao_esquerdo = False
+    elif not botao_esquerdo:
+        ed_botao.config(text='Botão Direito')
+        botao_esquerdo = True
+
 def auto_cliker():
     tempo = float(entrada_tempo.get())
     global click
-    while click:
-        pyautogui.leftClick()
-        time.sleep(tempo)
+    if botao_esquerdo:
+        while click:
+            pyautogui.leftClick()
+            time.sleep(tempo)
+    elif not botao_esquerdo:
+        while click:
+            pyautogui.rightClick()
+            time.sleep(tempo)
 
 
 def Iniciar():
@@ -64,6 +80,8 @@ def ModoBP(event=None):
         entrada_tempo['fg'] = 'black'
         area2['bg'] = 'gray94'
         label_status['bg'] = 'gray94'
+        ed_botao['bg'] = 'gray94'
+        ed_botao['fg'] = 'black'
         area3['bg'] = 'gray94'
         botao_iniciar['bg'] = 'gray94'
         botao_iniciar['fg'] = 'black'
@@ -87,6 +105,8 @@ def ModoBP(event=None):
         entrada_tempo['bg'] = 'gray'
         entrada_tempo['fg'] = 'gray90'
         area2['bg'] = 'gray16'
+        ed_botao['bg'] = 'gray16'
+        ed_botao['fg'] = 'gray86'
         label_status['bg'] = 'gray16'
         area3['bg'] = 'gray16'
         botao_iniciar['bg'] = 'gray16'
@@ -108,7 +128,6 @@ def Sair_app(event=None):
 titulo = tk.Label(text="Auto Cliker\nVersão:001",font=("Arial", 10, "bold"),bg="light gray")
 titulo['border'] = 5
 titulo.pack(pady= 10,padx= 5)
-
 # Começo da area 1
 area1 = Frame()
 #area1["pady"] = 3
@@ -132,6 +151,8 @@ area2['border'] = 1
 area2.pack()
 label_status = tk.Label(area2,text="Status: DESLIGADO", fg="red",font=("Arial",10 ))
 label_status.pack()
+ed_botao = tk.Button(text='Botão Esquerdo',command=Botao_esquerda_direita)
+ed_botao.pack()
 # Fim da area 2 onde mostra se o programa(Auto-Cleker) está ligado ou desligado
 
 # Começo da area 3
@@ -152,7 +173,7 @@ area4["pady"] = 5
 area4["width"] = 5
 area4['border'] = 1
 area4.pack()
-botao_sair = tk.Button(area4,text="Sair",command=quit)
+botao_sair = tk.Button(area4,text="Sair",command=Sair_app)
 botao_sair.pack()
 # Fim da area 4 onde tem o botão de Sair do programa
 
@@ -171,6 +192,7 @@ label_status_modo.pack(padx=5,pady=5,side="left")
 keyboard.add_hotkey("\+1", Parar_iniciar)
 keyboard.add_hotkey("\+esc", Sair_app)
 keyboard.add_hotkey("\+2", ModoBP)
+keyboard.add_hotkey("\+3",Botao_esquerda_direita)
 
 tela.mainloop()
 
